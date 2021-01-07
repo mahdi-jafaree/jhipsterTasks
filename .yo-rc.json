@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "info.parsa.erp",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "task0",
+    "packageName": "info.parsa.erp",
+    "packageFolder": "info/parsa/erp",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OWVlNDM0ZWFlNzZjNDFjNmJlYWQxZDc4YjI0NmNlZjk3N2RhZGViNGFmZDM0MmM3MTIxZmJmYWRhNjljZDNlYTg5NmJkNTAyNmQzYTY3ZDYzMDRmZmU2ZTMzNmU2OTBiODU2OGYzMjEzNjlhODQzNjIxMWNmMjFiNjg5N2UzODM=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "react",
+    "clientTheme": "cyborg",
+    "clientThemeVariant": "dark",
+    "creationTimestamp": 1610001894769,
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en", "fa"],
+    "blueprints": []
+  }
+}
