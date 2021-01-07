@@ -48,6 +48,11 @@ public class CacheConfiguration {
             createCache(cm, info.parsa.erp.domain.User.class.getName());
             createCache(cm, info.parsa.erp.domain.Authority.class.getName());
             createCache(cm, info.parsa.erp.domain.User.class.getName() + ".authorities");
+            createCache(cm, info.parsa.erp.domain.Vendor.class.getName());
+            createCache(cm, info.parsa.erp.domain.Contract.class.getName());
+            createCache(cm, info.parsa.erp.domain.Invoice.class.getName());
+            createCache(cm, info.parsa.erp.domain.Vendor.class.getName() + ".contracts");
+            createCache(cm, info.parsa.erp.domain.Contract.class.getName() + ".invoices");
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,33 @@
+{
+  "name": "Invoice",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "contract",
+      "otherEntityRelationshipName": "invoice",
+      "relationshipName": "contract",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210107074939",
+  "entityTableName": "invoice",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Contract",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "invoice",
+      "otherEntityRelationshipName": "contract",
+      "relationshipName": "invoice"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vendor",
+      "otherEntityRelationshipName": "contract",
+      "javadoc": "Another side of the same relationship",
+      "relationshipName": "vendor",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210107074839",
+  "entityTableName": "contract",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

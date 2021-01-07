@@ -1,0 +1,32 @@
+{
+  "name": "Vendor",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "contract",
+      "otherEntityRelationshipName": "vendor",
+      "relationshipName": "contract"
+    }
+  ],
+  "changelogDate": "20210107074739",
+  "entityTableName": "vendor",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
