@@ -1,66 +1,99 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 import { Translate, ICrudGetAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { DataTable } from 'primereact/datatable'
+import { Column } from 'primereact/column'
+import { TabView, TabPanel } from 'primereact/tabview'
 import { IRootState } from 'app/shared/reducers';
-import { getEntity } from './vendor.reducer';
+import { getEntity as getVendorEntity } from './vendor.reducer';
+import { getEntities as getContractEntities } from '../contract/contract.reducer'
+import { getEntities as getInvoiceEntites } from '../invoice/invoice.reducer'
 import { IVendor } from 'app/shared/model/vendor.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
-export interface IVendorDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
+export interface IVendorDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> { }
 
 export const VendorDetail = (props: IVendorDetailProps) => {
   useEffect(() => {
-    props.getEntity(props.match.params.id);
-  }, []);
+    props.getVendorEntity(props.match.params.id);
+    props.getContractEntities();
+    props.getInvoiceEntites();
 
-  const { vendorEntity } = props;
+  }, []);
+  const vendorData = {
+    name: "",
+    contracts: { title: "" },
+    invoices: { title: "", amount: null as number },
+  }
+  const { vendorEntity, contractEntities, invoiceEntities } = props;
+  const [contracts, setContracts] = useState([])
+  const [invoices, setInvoices] = useState([])
+  const [vendor, setVendor] = useState(vendorData)
+  const [selectedId, setSelectedId] = useState(1)
+
+  useEffect(() => {
+    let _tmpList = []
+    contractEntities.forEach((el) => _tmpList.unshift(el));
+    setContracts(_tmpList);
+
+    _tmpList = []
+    invoiceEntities.forEach((el) => _tmpList.unshift(el))
+    setInvoices(_tmpList)
+  }, [props.contractEntities, props.invoiceEntities])
+
+
+  const updateInvoices = (id: number) => {
+    const _tmpList = props.invoiceEntities.filter((invo, index, arr)=>{
+      return (invo.contract!==null && invo.contract.id ===id)
+    })
+    console.log(_tmpList)
+    setInvoices(_tmpList)
+  }
+  
+
   return (
-    <Row>
-      <Col md="8">
-        <h2>
-          <Translate contentKey="task0App.vendor.detail.title">Vendor</Translate> [<b>{vendorEntity.id}</b>]
-        </h2>
-        <dl className="jh-entity-details">
-          <dt>
-            <span id="name">
-              <Translate contentKey="task0App.vendor.name">Name</Translate>
-            </span>
-          </dt>
-          <dd>{vendorEntity.name}</dd>
-          <dt>
-            <span id="email">
-              <Translate contentKey="task0App.vendor.email">Email</Translate>
-            </span>
-          </dt>
-          <dd>{vendorEntity.email}</dd>
-        </dl>
-        <Button tag={Link} to="/vendor" replace color="info">
-          <FontAwesomeIcon icon="arrow-left" />{' '}
-          <span className="d-none d-md-inline">
-            <Translate contentKey="entity.action.back">Back</Translate>
-          </span>
-        </Button>
-        &nbsp;
-        <Button tag={Link} to={`/vendor/${vendorEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" />{' '}
-          <span className="d-none d-md-inline">
-            <Translate contentKey="entity.action.edit">Edit</Translate>
-          </span>
-        </Button>
-      </Col>
-    </Row>
+    <div>
+      <div className="p-grid">
+        <div className="p-col-2">
+          <h5>ID</h5>
+          <h6>{props.vendorEntity.id}</h6>
+        </div>
+        <div className="p-col-2">
+          <h5>Name</h5>
+          <h6>{props.vendorEntity.name}</h6>
+        </div>
+      </div>
+      <div className="p-grid">
+        <div className="p-col">
+          <DataTable value={contracts}
+            onRowClick={(event) => { updateInvoices(event.data.id) }}>
+            <Column field="title" header="Contracts"></Column>
+          </DataTable>
+        </div>
+        <div className="p-col">
+          <DataTable value={invoices}>
+            <Column field="title"></Column>
+          </DataTable>
+        </div>
+
+      </div>
+
+
+    </div>
+
   );
 };
 
-const mapStateToProps = ({ vendor }: IRootState) => ({
+const mapStateToProps = ({ vendor, contract, invoice }: IRootState) => ({
   vendorEntity: vendor.entity,
+  contractEntities: contract.entities,
+  invoiceEntities: invoice.entities,
 });
 
-const mapDispatchToProps = { getEntity };
+const mapDispatchToProps = { getVendorEntity, getContractEntities, getInvoiceEntites };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

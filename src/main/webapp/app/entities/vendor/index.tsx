@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
-
 import Vendor from './vendor';
 import VendorDetail from './vendor-detail';
 import VendorUpdate from './vendor-update';
